@@ -1,22 +1,55 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-layout class="grid place-items-center min-h-screen" page-title="Ballerini Ciphery">
+    <div class="container p-3 md:p-0">
+        <x-header />
 
-        <title>Ballerini Ciphery</title>
+        <main class="mt-12 grid grid-cols-3 gap-10">
+            <x-box class="col-span-3 lg:col-span-2">
+                <section>
+                    <x-title>Senha Padrão</x-title>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@500;600;800&display=swap" rel="stylesheet">
+                    <div class="mt-3 flex flex-wrap items-stretch gap-2">
+                        <x-form.input class="flex-grow" value="32tqk&fa4@4z%1&L%dtdGxTQD4" disabled />
 
-        @livewireStyles
-        @vite('resources/css/app.css')
-    </head>
-    <body class="antialiased">
-        <h1>Olá mundo</h1>
+                        <div class="flex gap-2">
+                            <x-form.button variant="secondary" icon-class="ph ph-files" />
+                            <x-form.button>Gerar</x-form.button>
+                        </div>
+                    </div>
+                </section>
 
-        @livewireScripts
-        @vite('resources/js/app.js')
-    </body>
-</html>
+                <section class="mt-10">
+                    <x-title>Hash Gerado</x-title>
+
+                    <div class="mt-3 flex flex-wrap items-stretch gap-2">
+                        <x-form.input class="flex-grow" value="32tqk&fa4@4z%1&L%dtdGxTQD4" disabled />
+                        <x-form.button icon-class="ph ph-files">Copiar</x-form.button>
+                    </div>
+
+                    <x-badge.wrapper class="mt-8">
+                        <x-badge>MD5</x-badge>
+                        <x-badge variant="secondary">SHA-1</x-badge>
+                        <x-badge variant="secondary">Bycript</x-badge>
+                    </x-badge.wrapper>
+                </section>
+            </x-box>
+
+            <x-box class="col-span-3 lg:col-span-1">
+                <section>
+                    <x-title>Características</x-title>
+
+                    <x-badge.wrapper class="mt-3">
+                        <x-badge>ABC</x-badge>
+                        <x-badge variant="secondary">abc</x-badge>
+                        <x-badge variant="secondary">123</x-badge>
+                        <x-badge variant="secondary">!#@</x-badge>
+                    </x-badge.wrapper>
+                </section>
+
+                <section class="mt-6">
+                    <x-title>Tamanho</x-title>
+                    <x-form.input class="w-1/3 font-sans" type="number" />
+                </section>
+            </x-box>
+        </main>
+    </div>
+</x-layout>

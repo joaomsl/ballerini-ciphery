@@ -8,7 +8,7 @@ export default {
     extend: {
         fontFamily: {
             sans: 'Inter, sans-serif',
-            mono: '"BM Plex Mono", ui-monospace, SFMono-Regular'
+            mono: '"IBM Plex Mono", ui-monospace, SFMono-Regular'
         }
     },
   },

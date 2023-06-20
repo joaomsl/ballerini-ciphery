@@ -5,7 +5,7 @@
     default => 'bg-rose-500 text-zinc-50 hover:bg-rose-500/90 transition-colors'
 })
 
-<button @class([$classByVariant, 'block rounded px-6 font-semibold text-sm w-100 h-100 flex items-center gap-2'])>
+<button {{ $attributes->class([$classByVariant, 'block rounded px-6 font-semibold text-sm w-100 h-100 flex items-center gap-2']) }}>
     @if(is_string($iconClass))
         <i @class([$iconClass, 'text-base text-xl'])></i>
     @endif

@@ -14,14 +14,12 @@
 
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-        @livewireStyles
         @vite(['resources/css/app.css'])
     </head>
     <body {{ $attributes->class("antialiased bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-400") }}>
 
         {{ $slot }}
 
-        @livewireScripts
         @vite('resources/js/app.js')
     </body>
 </html>

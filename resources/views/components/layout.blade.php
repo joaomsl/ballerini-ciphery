@@ -1,7 +1,7 @@
 @props(['pageTitle'])
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="{{ \App\Extra\Theme::get() }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +15,9 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         @livewireStyles
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css'])
     </head>
-    <body {{ $attributes->class("antialiased bg-zinc-900 text-zinc-400") }}>
+    <body {{ $attributes->class("antialiased bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-400") }}>
 
         {{ $slot }}
 

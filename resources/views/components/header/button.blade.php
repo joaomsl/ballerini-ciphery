@@ -5,7 +5,7 @@
 
 <{{ $element }}
     {{ $isAnchor ? sprintf('href=%s', $href) : '' }}
-    {{ $attributes->class('block bg-zinc-800 rounded p-2 leading-none hover:text-zinc-200 transition-colors hover:cursor-pointer') }}
+    {{ $attributes->class('block bg-zinc-100 dark:bg-zinc-800 rounded p-2 leading-none hover:dark:text-zinc-200 hover:text-zinc-500/80 hover:cursor-pointer') }}
 >
     <i @class([$iconClass, 'text-base leading-none'])></i>
 </{{ $element }}>

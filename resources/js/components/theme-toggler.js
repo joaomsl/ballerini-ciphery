@@ -1,12 +1,10 @@
-function makeTheme(id, iconClass, whenEnable = null, whenDisable = null) {
-    return {id, iconClass, whenEnable, whenDisable}
+function makeTheme(id, iconClass, activeClass) {
+    return {id, iconClass, activeClass}
 }
 
-const htmlElClasses = document.documentElement.classList
-
 const themes = [
-    makeTheme(0, 'ph-sun'),
-    makeTheme(1, 'ph-moon-stars', () => htmlElClasses.add('dark'), () => htmlElClasses.remove('dark'))
+    makeTheme(0, 'ph-moon-stars', 'light'),
+    makeTheme(1, 'ph-sun', 'dark')
 ]
 
 const storage = window.localStorage
@@ -18,8 +16,8 @@ function getThemeOrPickFirst(id) {
 
 function getCurrentTheme() {
     const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let themeId = storage.getItem(storageKey) 
-    
+    let themeId = storage.getItem(storageKey)
+
     if(prefersDarkTheme && !themeId) {
         themeId = 1
     }
@@ -31,13 +29,11 @@ function getCurrentTheme() {
 }
 
 function setTheme(theme) {
-    if(getCurrentTheme().whenDisable) {
-        getCurrentTheme().whenDisable()
-    }
-    if(theme.whenEnable) {
-        theme.whenEnable()
-    }
-    
+    const htmlElClassList = document.documentElement.classList
+
+    htmlElClassList.remove(getCurrentTheme().activeClass)
+    htmlElClassList.add(theme.activeClass)
+
     storage.setItem(storageKey, theme.id)
 }
 
@@ -50,17 +46,24 @@ export default () => ({
     },
 
     init() {
+        this.currentTheme = getCurrentTheme()
+        this.refreshIcons(this.$el, this.currentTheme)
+
         this.$watch(
-            'currentTheme', 
+            'currentTheme',
             (newTheme, oldTheme) => this.watchChangesOnTheme(this.$el, newTheme, oldTheme)
         )
-        this.currentTheme = getCurrentTheme()
     },
 
     watchChangesOnTheme(buttonElement, newTheme, oldTheme) {
         setTheme(newTheme)
+        this.refreshIcons(buttonElement, newTheme, oldTheme)
+        this.$axios.put('/theme', {theme: newTheme.activeClass})
+    },
 
+    refreshIcons(buttonElement, newTheme, oldTheme) {
         const icons = [newTheme.iconClass]
+
         if(oldTheme) {
             icons.push(oldTheme.iconClass)
         }

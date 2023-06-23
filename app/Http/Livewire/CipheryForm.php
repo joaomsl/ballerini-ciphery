@@ -73,6 +73,8 @@ class CipheryForm extends Component
             $this->characteristicsCollection->allCharacteristicsIds(),
             array_fill(0, $this->characteristicsCollection->count(), true)
         );
+
+        $this->regeneratePasswordAndHash();
     }
 
     public function updatedPasswordSize()

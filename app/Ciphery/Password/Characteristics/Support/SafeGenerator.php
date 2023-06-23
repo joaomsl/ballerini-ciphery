@@ -11,7 +11,7 @@ class SafeGenerator
 
     public const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
     public const NUMBERS = '0123456789';
-    public const SYMBOLS = '"\'!@#$%&*()-_=+{[`´^~}]<,>.:;?/\\|';
+    public const SYMBOLS = '"\'!@#$%&*()-_=+{[`^~}]<,>.:;?/|';
 
     /**
      * @param int $length

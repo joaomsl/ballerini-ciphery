@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ciphery;
 
-use App\Ciphery\Password\Characteristics\Contracts\Characteristic;
+use App\Ciphery\Contracts\Characteristic;
 use Illuminate\Support\Str;
 
 class Ciphery
@@ -26,11 +26,11 @@ class Ciphery
 
         do {
             foreach($this->characteristics as $ch) {
-                $password = str_shuffle($ch->generateCharacters($perCharacteristic) . $password);
+                $password = $ch->generateCharacters($perCharacteristic) . $password;
             }
         } while(Str::length($password) < $length);
 
-        return Str::substr($password, 0, $length);
+        return Str::substr(str_shuffle($password), 0, $length);
     }
 
 }

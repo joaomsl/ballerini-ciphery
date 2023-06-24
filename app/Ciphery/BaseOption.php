@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Ciphery\Support;
+namespace App\Ciphery;
 
-use App\Ciphery\Support\Contracts\Option;
+use App\Ciphery\Contracts\Option;
 
 class BaseOption implements Option
 {

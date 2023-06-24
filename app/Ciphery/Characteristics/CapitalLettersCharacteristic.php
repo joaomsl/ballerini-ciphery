@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Ciphery\Password\Characteristics;
+namespace App\Ciphery\Characteristics;
 
-use App\Ciphery\Password\Characteristics\Support\SafeGenerator;
+use App\Ciphery\Support\SafeGenerator;
 use Illuminate\Support\Str;
 
 class CapitalLettersCharacteristic extends BaseCharacteristic

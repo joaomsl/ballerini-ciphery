@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Ciphery\Password\Characteristics\Contracts;
-
-use App\Ciphery\Support\Contracts\Option;
+namespace App\Ciphery\Contracts;
 
 interface Characteristic extends Option
 {

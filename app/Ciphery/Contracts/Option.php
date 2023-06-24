@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Ciphery\Support\Contracts;
+namespace App\Ciphery\Contracts;
 
 interface Option
 {

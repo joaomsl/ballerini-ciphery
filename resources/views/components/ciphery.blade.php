@@ -1,48 +1,56 @@
 <main x-data="ciphery" class="mt-12 grid grid-cols-3 gap-10">
     <x-box class="col-span-3 lg:col-span-2">
-        <section>
-            <x-title>Senha Padrão</x-title>
+        <x-box.load-ring x-show="!initialized" />
 
-            <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                <x-form.input class="flex-grow" disabled />
+        <div x-cloak x-show="initialized">
+            <section>
+                <x-title>Senha Padrão</x-title>
 
-                <div class="flex gap-2">
-                    <x-form.button variant="secondary" icon-class="ph ph-files" />
-                    <x-form.button wire:click.prevent="regeneratePasswordAndHash">Gerar</x-form.button>
+                <div class="mt-3 flex flex-wrap items-stretch gap-2">
+                    <x-form.input class="flex-grow" disabled />
+
+                    <div class="flex gap-2">
+                        <x-form.button variant="secondary" icon-class="ph ph-files" />
+                        <x-form.button>Gerar</x-form.button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="mt-10">
-            <x-title>Hash Gerado</x-title>
+            <section class="mt-10">
+                <x-title>Hash Gerado</x-title>
 
-            <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                <x-form.input class="flex-grow" disabled />
-                <x-form.button  icon-class="ph ph-files">Copiar</x-form.button>
-            </div>
+                <div class="mt-3 flex flex-wrap items-stretch gap-2">
+                    <x-form.input class="flex-grow" disabled />
+                    <x-form.button  icon-class="ph ph-files">Copiar</x-form.button>
+                </div>
 
-            <x-badge.wrapper class="mt-8">
-                    <x-badge>
-                        AAAAA
-                    </x-badge>
-            </x-badge.wrapper>
-        </section>
+                <x-badge.wrapper class="mt-8">
+                    <template x-for="algo of state.hashAlgos">
+                        <x-badge x-data="badge(algo.active)" x-text="algo.name" x-bind:class="getClassesByVariant()" />
+                    </template>
+                </x-badge.wrapper>
+            </section>
+        </div>
     </x-box>
 
     <x-box class="col-span-3 lg:col-span-1">
-        <section>
-            <x-title>Características</x-title>
+        <x-box.load-ring x-show="!initialized" />
 
-            <x-badge.wrapper class="mt-3">
-                <x-badge>
-                    AAAAA
-                </x-badge>
-            </x-badge.wrapper>
-        </section>
+        <div x-cloak x-show="initialized">
+            <section>
+                <x-title>Características</x-title>
 
-        <section class="mt-6">
-            <x-title>Tamanho</x-title>
-            <x-form.input class="w-1/3 font-sans" type="number" min="1" max="64" />
-        </section>
+                <x-badge.wrapper class="mt-3">
+                    <template x-for="charType of state.charTypes">
+                        <x-badge x-data="badge(charType.active)" x-text="charType.name" x-bind:class="getClassesByVariant()" />
+                    </template>
+                </x-badge.wrapper>
+            </section>
+
+            <section class="mt-6">
+                <x-title>Tamanho</x-title>
+                <x-form.input class="w-1/3 font-sans" type="number" min="1" max="64" x-model="state.size" />
+            </section>
+        </div>
     </x-box>
 </main>

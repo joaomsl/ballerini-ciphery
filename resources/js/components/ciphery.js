@@ -1,5 +1,7 @@
 export default function ciphery() {
     return {
+        initialized: false,
+
         generatedPassword: '',
         generatedHash: '',
 
@@ -10,7 +12,12 @@ export default function ciphery() {
         },
 
         async init() {
-            await this.fetchOptionsAndPopulateState()
+            if(!await this.fetchOptionsAndPopulateState()) {
+                alert('Erro ao recuperar as opções. Recarregue a página.')
+                return;
+            }
+
+            this.initialized = true
         },
 
         makeStateOption(id, name, active = false) {
@@ -18,16 +25,18 @@ export default function ciphery() {
         },
 
         async fetchOptionsAndPopulateState() {
-            const response = await this.$axios.options('/api/generator')
+            try {
+                const response = await this.$axios.options('/api/generator')
 
-            if(response.status !== 200) {
-                alert('Não foi possível realizar o fetch de estado')
-                return;
+                const data = response.data
+                this.populateHashingAlgos(data.hashing_algos)
+                this.populateCharTypes(data.characteristics)
+
+                return true
+            } catch(error) {
+                console.log(error)
+                return false
             }
-
-            const data = response.data
-            this.populateHashingAlgos(data.hashing_algos)
-            this.populateCharTypes(data.characteristics)
         },
 
         populateHashingAlgos(hashAlgos) {

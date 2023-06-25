@@ -1,6 +1,8 @@
 export default function ciphery() {
     return {
         initialized: false,
+        generatingPassword: false,
+        generatingHash: false,
 
         generatedPassword: '',
         generatedHash: '',
@@ -32,11 +34,10 @@ export default function ciphery() {
 
         async fetchOptionsAndPopulateState() {
             try {
-                const response = await this.$axios.options('/api/generator')
+                const response = (await this.$axios.options('/api/generator')).data
 
-                const data = response.data
-                this.populateHashingAlgos(data.hashing_algos)
-                this.populateCharTypes(data.characteristics)
+                this.populateHashingAlgos(response.hashing_algos)
+                this.populateCharTypes(response.characteristics)
 
                 return true
             } catch(error) {
@@ -61,8 +62,18 @@ export default function ciphery() {
         },
 
         toggleHashingAlgo(id) {
+            const hashAlgos = this.state.hashAlgos
+
+            if(hashAlgos[id].active) {
+                return;
+            }
+
             for(let currentId in this.state.hashAlgos) {
-                this.state.hashAlgos[currentId].active = id === currentId
+                hashAlgos[currentId].active = id === currentId
+            }
+
+            if(this.generatedPassword) {
+                this.regenerateHash()
             }
         },
 
@@ -75,6 +86,56 @@ export default function ciphery() {
                     break
                 }
             }
+        },
+
+        getSelectedHashAlgo() {
+            return Object.values(this.state.hashAlgos)
+                .filter(hashAlgo => hashAlgo.active)
+                .shift()
+        },
+
+        async regeneratePassword() {
+            const data = {
+                characteristics: Object.values(this.state.charTypes)
+                    .filter(charType => charType.active)
+                    .map(charType => charType.id),
+                hashing_algo: this.getSelectedHashAlgo().id,
+                size: this.state.size
+            }
+
+            try {
+                this.generatingPassword = true
+
+                const response = (await this.$axios.post('/api/generator', data)).data
+
+                this.generatedPassword = response.password
+                this.generatedHash = response.hash
+            } catch(error) {
+                alert('Um erro ocorreu ao gerar a sua senha. Tente novamente mais tarde.')
+                console.error(error)
+            }
+
+            this.generatingPassword = false
+        },
+
+        async regenerateHash() {
+            const data = {
+                hashing_algo: this.getSelectedHashAlgo().id,
+                password: this.generatedPassword
+            }
+
+            try {
+                this.generatingHash = true
+
+                const response = (await this.$axios.post('/api/generator/hash', data)).data
+
+                this.generatedHash = response.hash
+            } catch(error) {
+                alert('Ocorreu um erro ao regerar o hash. Tente novamente mais tarde.')
+                console.log(error)
+            }
+
+            this.generatingHash = false
         }
     }
 }

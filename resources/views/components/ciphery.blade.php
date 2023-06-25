@@ -11,7 +11,10 @@
 
                     <div class="flex gap-2">
                         <x-form.button x-bind="copyTrigger" variant="secondary" icon-class="ph ph-files" />
-                        <x-form.button>Gerar</x-form.button>
+                        <x-form.button @click="regeneratePassword">
+                            <span x-show="!generatingPassword">Gerar</span>
+                            <x-load-ring x-show="generatingPassword" />
+                        </x-form.button>
                     </div>
                 </div>
             </section>
@@ -25,6 +28,7 @@
                 </div>
 
                 <x-badge.wrapper class="mt-8">
+                    <x-load-ring x-show="generatingHash" variant="secondary" />
                     <template x-for="algo of state.hashAlgos" :key="algo.id">
                         <x-badge
                             x-data="badge(algo.active)"

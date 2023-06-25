@@ -11,5 +11,4 @@
     @endif
 
     {{ $slot }}
-    {{-- primary, secondary --}}
 </button>

@@ -5,19 +5,25 @@ export default function ciphery() {
         generatedPassword: '',
         generatedHash: '',
 
-        state: {
+        state: this.$persist({
             hashAlgos: {},
             charTypes: {},
             size: 8
-        },
+        }).as('ciphery_state'),
 
         async init() {
-            if(!await this.fetchOptionsAndPopulateState()) {
+            if(!this.hasCachedState() && !await this.fetchOptionsAndPopulateState()) {
                 alert('Erro ao recuperar as opções. Recarregue a página.')
                 return;
             }
 
             this.initialized = true
+        },
+
+        hasCachedState() {
+            const isEmpty = object => Object.keys(object).length === 0
+
+            return !isEmpty(this.state.hashAlgos) && !isEmpty(this.state.charTypes)
         },
 
         makeStateOption(id, name, active = false) {

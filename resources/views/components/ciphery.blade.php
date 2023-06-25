@@ -6,11 +6,11 @@
             <section>
                 <x-title>Senha Padrão</x-title>
 
-                <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                    <x-form.input class="flex-grow" disabled />
+                <div x-data="copyableInput" class="mt-3 flex flex-wrap items-stretch gap-2">
+                    <x-form.input x-modelable="content" x-model="generatedPassword" class="flex-grow" disabled />
 
                     <div class="flex gap-2">
-                        <x-form.button variant="secondary" icon-class="ph ph-files" />
+                        <x-form.button x-bind="copyTrigger" variant="secondary" icon-class="ph ph-files" />
                         <x-form.button>Gerar</x-form.button>
                     </div>
                 </div>
@@ -19,9 +19,9 @@
             <section class="mt-10">
                 <x-title>Hash Gerado</x-title>
 
-                <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                    <x-form.input class="flex-grow" disabled />
-                    <x-form.button  icon-class="ph ph-files">Copiar</x-form.button>
+                <div x-data="copyableInput" class="mt-3 flex flex-wrap items-stretch gap-2">
+                    <x-form.input x-modelable="content" x-model="generatedHash" class="flex-grow" disabled />
+                    <x-form.button x-bind="copyTrigger" icon-class="ph ph-files">Copiar</x-form.button>
                 </div>
 
                 <x-badge.wrapper class="mt-8">

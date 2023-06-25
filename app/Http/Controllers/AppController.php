@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Extra\Theme;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\ChangeThemeRequest;
 
 class AppController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function welcome()
     {
         return view('welcome');
     }
 
-    public function theme(Request $request)
+    /**
+     * @param ChangeThemeRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changeTheme(ChangeThemeRequest $request)
     {
-        $request->validate([
-            'theme' => Rule::in(Theme::SUPPORTED_THEMES)
-        ]);
-
-        Theme::store($request->theme);
-
+        Theme::storeClass($request->theme_class);
         return response()->json(['message' => 'Theme saved.']);
     }
 

@@ -1,10 +1,10 @@
-export default function(content) {
+export default function copyableInput() {
     return {
-        content: content,
+        content: '',
 
         copyTrigger: {
             ['@click']() {
-                navigator.clipboard.writeText(this.content);
+                navigator.clipboard.writeText(this.content)
             }
         }
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Ciphery\Password\Characteristics\Support;
+namespace App\Ciphery\Support;
 
 use Illuminate\Support\Str;
 
@@ -22,16 +22,16 @@ class SafeGenerator
         $lastCharIndex = Str::length($chars) - 1;
 
         $result = '';
-        $lastSelectedCharIndex = null;
+        $lastUsedCharIndex = null;
 
         do {
-            $index = mt_rand(0, $lastCharIndex);
-            if($lastSelectedCharIndex === $index) {
+            $randomIndex = mt_rand(0, $lastCharIndex);
+            if($lastUsedCharIndex === $randomIndex) {
                 continue;
             }
-            $lastSelectedCharIndex = $index;
+            $lastUsedCharIndex = $randomIndex;
 
-            $result .= $chars[$index];
+            $result .= $chars[$randomIndex];
         } while(Str::length($result) < $length);
 
         return $result;

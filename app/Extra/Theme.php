@@ -9,16 +9,21 @@ class Theme
 
     private const SESSION_KEY = 'web_theme';
 
-    public const SUPPORTED_THEMES = ['light', 'dark'];
-
-    public static function store(string $theme): void
+    /**
+     * @param string|null $theme
+     * @return void
+     */
+    public static function storeClass(?string $theme): void
     {
         session()->put(self::SESSION_KEY, $theme);
     }
 
-    public static function get(): string
+    /**
+     * @return string|null
+     */
+    public static function getClass(): ?string
     {
-        return session(self::SESSION_KEY, 'light');
+        return session(self::SESSION_KEY);
     }
 
 }

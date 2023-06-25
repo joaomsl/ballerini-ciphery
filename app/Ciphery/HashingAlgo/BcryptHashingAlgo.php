@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ciphery\HashingAlgo;
 
-class BycriptHashingAlgo extends BaseHashingAlgo
+class BcryptHashingAlgo extends BaseHashingAlgo
 {
 
     /** @inheritDoc */

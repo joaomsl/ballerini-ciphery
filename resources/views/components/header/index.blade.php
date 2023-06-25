@@ -4,7 +4,10 @@
         <p class="text-zinc-800 dark:text-zinc-500 text-xl font-medium">Desbloqueie seu mundo com senhas seguras!</p>
     </div>
     <div class="order-first flex items-center gap-1 ms-auto sm:order-last sm:ms-0">
-        <x-header.button x-cloak x-data="themeToggler" x-bind="toggleButton" icon-class="ph" />
+        <x-header.button x-data="themeButton" @click="toggleTheme" icon-class="ph">
+            <x-slot:icon x-bind:class="theme.iconClass"></x-slot::icon>
+        </x-header.button>
+
         <x-header.button
             href="https://github.com/joaomsl/ballerini-ciphery"
             target="_blank"

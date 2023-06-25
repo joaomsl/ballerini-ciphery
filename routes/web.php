@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['controller' => AppController::class], function() {
-    Route::get('/', 'welcome')->name('welcome');
-    Route::put('/theme', 'theme')->name('theme');
+    Route::get('/', 'welcome');
+    Route::put('/change-theme', 'changeTheme');
 });

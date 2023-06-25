@@ -10,12 +10,10 @@ use Illuminate\Support\Collection;
 class CharacteristicsCollection extends Collection
 {
 
-    /** @param Characteristic[] $characteristics */
+    /** @param array<string, Characteristic> $characteristics */
     public function __construct(array $characteristics)
     {
-        foreach($characteristics as $characteristic) {
-            $this->put($characteristic->getId(), $characteristic);
-        }
+        parent::__construct($characteristics);
     }
 
 }

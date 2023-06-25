@@ -10,12 +10,10 @@ use Illuminate\Support\Collection;
 class HashingAlgoCollection extends Collection
 {
 
-    /** @param HashingAlgo[] $hashingAlgos */
+    /** @param array<string, HashingAlgo> $hashingAlgos */
     public function __construct(array $hashingAlgos)
     {
-        foreach($hashingAlgos as $algo) {
-            $this->put($algo->getId(), $algo);
-        }
+        parent::__construct($hashingAlgos);
     }
 
 }

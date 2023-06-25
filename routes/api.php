@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['controller' => CipheryController::class, 'prefix' => '/generator'], function() {
     Route::options('/', 'options');
+    Route::post('/', 'generatePassword');
+
+    Route::post('/hash', 'generateHash');
 });

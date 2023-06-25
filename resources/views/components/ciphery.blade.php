@@ -25,8 +25,15 @@
                 </div>
 
                 <x-badge.wrapper class="mt-8">
-                    <template x-for="algo of state.hashAlgos">
-                        <x-badge x-data="badge(algo.active)" x-text="algo.name" x-bind:class="getClassesByVariant()" />
+                    <template x-for="algo of state.hashAlgos" :key="algo.id">
+                        <x-badge
+                            x-data="badge(algo.active)"
+                            x-text="algo.name"
+                            x-modelable="enabled"
+                            x-model="state.hashAlgos[algo.id].active"
+                            x-bind:class="getClassesByVariant()"
+                            @click="toggleHashingAlgo(algo.id)"
+                        />
                     </template>
                 </x-badge.wrapper>
             </section>
@@ -42,7 +49,14 @@
 
                 <x-badge.wrapper class="mt-3">
                     <template x-for="charType of state.charTypes">
-                        <x-badge x-data="badge(charType.active)" x-text="charType.name" x-bind:class="getClassesByVariant()" />
+                        <x-badge
+                            x-data="badge(charType.active)"
+                            x-text="charType.name"
+                            x-bind:class="getClassesByVariant()"
+                            x-modelable="enabled"
+                            x-model="state.charTypes[charType.id].active"
+                            @click="toggleCharType(charType.id)"
+                        />
                     </template>
                 </x-badge.wrapper>
             </section>

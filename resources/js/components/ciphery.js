@@ -52,6 +52,23 @@ export default function ciphery() {
             for(let [id, name] of Object.entries(charTypes)) {
                 this.state.charTypes[id] = this.makeStateOption(id, name, true)
             }
+        },
+
+        toggleHashingAlgo(id) {
+            for(let currentId in this.state.hashAlgos) {
+                this.state.hashAlgos[currentId].active = id === currentId
+            }
+        },
+
+        toggleCharType(id) {
+            for(let currentId in this.state.charTypes) {
+                let charType = this.state.charTypes[currentId]
+
+                if(currentId !== id && charType.active) {
+                    this.state.charTypes[id].active = !this.state.charTypes[id].active
+                    break
+                }
+            }
         }
     }
 }

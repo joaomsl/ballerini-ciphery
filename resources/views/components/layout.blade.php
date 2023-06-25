@@ -1,7 +1,7 @@
 @props(['pageTitle'])
 
 <!DOCTYPE html>
-<html class="{{ \App\Extra\Theme::get() }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="{{ \App\Extra\Theme::getClass() }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

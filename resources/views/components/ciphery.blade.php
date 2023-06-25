@@ -28,7 +28,6 @@
                 </div>
 
                 <x-badge.wrapper class="mt-8">
-                    <x-load-ring x-show="generatingHash" variant="secondary" />
                     <template x-for="algo of state.hashAlgos" :key="algo.id">
                         <x-badge
                             x-data="badge(algo.active)"
@@ -39,6 +38,7 @@
                             @click="toggleHashingAlgo(algo.id)"
                         />
                     </template>
+                    <x-load-ring x-show="generatingHash" variant="secondary" />
                 </x-badge.wrapper>
             </section>
         </div>

@@ -10,6 +10,9 @@ use Illuminate\Support\Str;
 class Ciphery
 {
 
+    public const MIN_LENGTH = 4;
+    public const MAX_LENGTH = 64;
+
     /** @param Characteristic[] $characteristics */
     public function __construct(protected array $characteristics)
     {}

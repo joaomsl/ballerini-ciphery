@@ -1,13 +1,13 @@
-<main class="mt-12 grid grid-cols-3 gap-10">
+<main x-data="ciphery" class="mt-12 grid grid-cols-3 gap-10">
     <x-box class="col-span-3 lg:col-span-2">
         <section>
             <x-title>Senha Padrão</x-title>
 
             <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                <x-form.input x-model="content" class="flex-grow" disabled />
+                <x-form.input class="flex-grow" disabled />
 
                 <div class="flex gap-2">
-                    <x-form.button x-bind="copyTrigger" variant="secondary" icon-class="ph ph-files" />
+                    <x-form.button variant="secondary" icon-class="ph ph-files" />
                     <x-form.button wire:click.prevent="regeneratePasswordAndHash">Gerar</x-form.button>
                 </div>
             </div>
@@ -17,8 +17,8 @@
             <x-title>Hash Gerado</x-title>
 
             <div class="mt-3 flex flex-wrap items-stretch gap-2">
-                <x-form.input x-model="content" class="flex-grow" disabled />
-                <x-form.button x-bind="copyTrigger" icon-class="ph ph-files">Copiar</x-form.button>
+                <x-form.input class="flex-grow" disabled />
+                <x-form.button  icon-class="ph ph-files">Copiar</x-form.button>
             </div>
 
             <x-badge.wrapper class="mt-8">

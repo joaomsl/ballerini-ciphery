@@ -7,10 +7,6 @@ const themes = [
     createTheme(1, 'ph-sun', 'dark')
 ]
 
-function getThemeOrFirst(id) {
-    return themes[id] ?? themes[0]
-}
-
 export default function themeButton() {
     return {
         themeId: this.$persist(0).as('ciphery_theme'),
@@ -23,15 +19,12 @@ export default function themeButton() {
                 'themeId',
                 (newThemeId, oldThemeId) => this.whenThemeChange(themes[newThemeId], themes[oldThemeId])
             )
-
-            console.log(this.$refs.icon)
         },
 
         whenThemeChange(newTheme, oldTheme = null) {
-            console.log(newTheme, oldTheme)
             const htmlClassList = document.documentElement.classList
 
-            if(newTheme.htmlClass) {
+            if(newTheme.htmlClass && newTheme.htmlClass) {
                 htmlClassList.add(newTheme.htmlClass)
             }
             if(oldTheme && oldTheme.htmlClass) {
@@ -49,7 +42,7 @@ export default function themeButton() {
         },
 
         toggleTheme() {
-            this.themeId = getThemeOrFirst(this.themeId + 1).id
+            this.themeId = (themes[this.themeId + 1] ?? themes[0]).id
         }
     }
 }

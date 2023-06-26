@@ -8,6 +8,7 @@ use App\Ciphery\Characteristics;
 use App\Ciphery\Contracts\Option;
 use App\Ciphery\HashingAlgo\HashingAlgoCollection;
 use Closure;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,8 +17,12 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {}
 
-    public function boot(): void
+    public function boot(UrlGenerator $url): void
     {
+        if(env('APP_ENV') == 'production') {
+            $url->forceScheme('https');
+        }
+
         $this->app->singleton(HashingAlgoCollection::class, Closure::fromCallable([$this, 'makeHashingAlgoCollection']));
         $this->app->singleton(CharacteristicsCollection::class, Closure::fromCallable([$this, 'makeCharacteristicsCollection']));
     }
